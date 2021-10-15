@@ -1,70 +1,86 @@
-import * as React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import FindJob from "./views/FindJob";
-import Profil from "./views/Profil";
+import React, {useEffect, useState} from 'react';
+import { Text, View, StyleSheet} from 'react-native';
+import SignUpForm from './components/SignUpForm';
+import firebase from 'firebase';
+import LoginForm from './components/LoginForm';
+import NewFindJob from "./components/NewFindJob";
+import { Card } from 'react-native-paper';
+
 //Resten af disse imports har forkerte stier. Skal ændres fra components til views
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-import StackNavigator from "./components/StackNavigator";
+const firebaseConfig = {
+    apiKey: "AIzaSyBIBJkpo5_X89Rw5QuO_bpK0zuw_CrnNr8",
+    authDomain: "socialjobber-1a05e.firebaseapp.com",
+    projectId: "socialjobber-1a05e",
+    storageBucket: "socialjobber-1a05e.appspot.com",
+    messagingSenderId: "826923145982",
+    appId: "1:826923145982:web:bde71a28d1d0ee803523af"
+};
 
-//Her oprettes en instans af tabnavigator
-const Tab = createBottomTabNavigator();
+export default function App() {
+    //Her oprettes bruger state variblen
+    const [user, setUser] = useState({ loggedIn: false });
 
-//Her oprettes de tre tekst referencer, der skal benyttes i vores screen komponenter
-const FindJobScreenText = "Dette er screen til FindJob. Den skal indeholde et map hvor alle de forskellige jobs skal" +
-    " ligge på kortet. Man skal kunne navigere rundt på kortet og klikke på et job og få detaljer om jobbet. Denne side bliver redigeret i views folderen og ved FindJob.js"
-const ProfilScreenText = "Dette screen skal indeholde profilen. Herunder skal man kunne se profilnavn, udførte jobs, penge tjent, rating, metadata osv. Denne sidde bliver redigeret i views folderen og ved Profil.js"
+    //Koden sikrer at kun én Firebase initieres under brug af appen.
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
 
-/*Oprettelse af root komponent
-* Her oprettes først en Navigationscontainer-komponent, der står for at håndtere state-ændringer & deep linking
-* Ydeligere info om denne komponent kan findes i følgende link: https://reactnavigation.org/docs/navigation-container/
-*
-* Dernæst kaldes Navigator, der styrer navigationen mellem de forskellige tabs.
-* I Tab navigatoren kalder en funktion i screenOptions, der har til formål at bestemme den aktuelle rute.
-* Pba. af ruten styles den pågældende tab ved at benytte de importerede ikoner og den fastsatte styling, som ,
-*  er fastsat  i tabBaroptions.
-*
-* Afslutningsvis angives de screen komponenter, vi ønsker at fremvise for hver tab. Komponenterne har vi importeret fra vores
-* componentsfolder. Hver komponent fremvises ved brug af en funktion, der returnerer de komponenter vi har defineret til vores tabNavigator
-* Hver komponent indeholder en reference til den tekst, som skal præsenteres i komponenten. Dertil er der skabt en nested Stacknavigator, som placeres i vores "details" tab.
-*
-* */
-function App() {
-    return (
-        <NavigationContainer>
-            <Tab.Navigator screenOptions={({ route }) => ({
-                tabBarIcon: ({ color, size }) => {
-                    if (route.name === 'FindJob') {
-                        return (
-                            <Ionicons
-                                name={'hammer-outline'}
-                                size={size}
-                                color={color}
-                            />
-                        );
-                    }
-                    else{
-                        return (
-                            <Ionicons
-                                name='person-outline'
-                                size={size}
-                                color={color}
-                            />
-                        );
-                    }
-                },
-            })}
-                           tabBarOptions={{
-                               activeTintColor: 'blue',
-                               inactiveTintColor: 'gray',
-                           }}
-            >
-                <Tab.Screen name="Find Job" children={()=><FindJob prop={FindJobScreenText}/>} />
-                <Tab.Screen name="Profil" children={()=><Profil prop={ProfilScreenText}/>} />
-            </Tab.Navigator>
-        </NavigationContainer>
-    );
+//onAuthstatechanged er en prædefineret metode, forsynet af firebase, som konstant observerer brugerens status (logget ind vs logget ud)
+//Pba. brugerens status foretages et callback i form af setUSer metoden, som håndterer user-state variablens status.
+    function onAuthStateChange(callback) {
+        return firebase.auth().onAuthStateChanged(user => {
+            if (user) {
+                callback({loggedIn: true, user: user});
+            } else {
+                callback({loggedIn: false});
+            }
+        });
+    }
+
+    //Heri aktiverer vi vores listener i form af onAuthStateChanged, så vi dynamisk observerer om brugeren er aktiv eller ej.
+    useEffect(() => {
+        const unsubscribe = onAuthStateChange(setUser);
+        return () => {
+            unsubscribe();
+        };
+    }, []);
+
+//Her oprettes gæstekomponentsindhold, der udgøres af sign-up og login siderne
+    const GuestPage = () => {
+        return(
+            <View style={styles.container}>
+                <Text style={styles.paragraph}>
+                    Opret eller Login med din firebase Email
+                </Text>
+
+                <Card style={{padding:20}}>
+                    <SignUpForm />
+                </Card>
+
+                <Card style={{padding:20}}>
+                    <LoginForm />
+                </Card>
+
+            </View>
+        )
+    }
+
+    return user.loggedIn ? <NewFindJob /> : <GuestPage/> ;
 }
 
-export default App
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        paddingTop: '5%',
+        backgroundColor: 'transparent',
+        padding: 20,
+    },
+    paragraph: {
+        margin: 24,
+        fontSize: 18,
+        fontWeight: 'bold',
+        textAlign: 'center',
+    },
+});
