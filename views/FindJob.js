@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 
-//HomeScreen komponenten tager en prop med og printer indholdet af denne i en <Text/>
-function HomeScreen({prop}) {
+//FindJob komponenten tager en prop med og printer indholdet af denne i en <Text/>
+function FindJob({prop}) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{prop}</Text>
@@ -10,9 +10,9 @@ function HomeScreen({prop}) {
     );
 }
 
-export default HomeScreen
+export default FindJob
 
-//Lokal styling til brug i HomeScreen
+//Lokal styling til brug i FindJob
 const styles = StyleSheet.create({
     container: {
         borderColor: 'red',

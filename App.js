@@ -1,18 +1,20 @@
 import * as React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import HomeScreen from "./views/HomeScreen";
+import FindJob from "./views/FindJob";
+import Profil from "./views/Profil";
 //Resten af disse imports har forkerte stier. Skal ændres fra components til views
-import SettingsScreen from "./views/SettingsScreen";
-//import Ionicons from 'react-native-vector-icons/Ionicons';
-import StackNavigator from "./views/StackNavigator";
+
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import StackNavigator from "./components/StackNavigator";
 
 //Her oprettes en instans af tabnavigator
 const Tab = createBottomTabNavigator();
 
 //Her oprettes de tre tekst referencer, der skal benyttes i vores screen komponenter
-const homeScreenText = "Dette er HomeScreen!"
-const settingsScreenText = "Dette er SettingsScreen!"
+const FindJobScreenText = "Dette er screen til FindJob. Den skal indeholde et map hvor alle de forskellige jobs skal" +
+    " ligge på kortet. Man skal kunne navigere rundt på kortet og klikke på et job og få detaljer om jobbet. Denne side bliver redigeret i views folderen og ved FindJob.js"
+const ProfilScreenText = "Dette screen skal indeholde profilen. Herunder skal man kunne se profilnavn, udførte jobs, penge tjent, rating, metadata osv. Denne sidde bliver redigeret i views folderen og ved Profil.js"
 
 /*Oprettelse af root komponent
 * Her oprettes først en Navigationscontainer-komponent, der står for at håndtere state-ændringer & deep linking
@@ -33,18 +35,10 @@ function App() {
         <NavigationContainer>
             <Tab.Navigator screenOptions={({ route }) => ({
                 tabBarIcon: ({ color, size }) => {
-                    if (route.name === 'Home') {
+                    if (route.name === 'FindJob') {
                         return (
                             <Ionicons
-                                name={'home-outline'}
-                                size={size}
-                                color={color}
-                            />
-                        );
-                    } else if (route.name === 'Settings') {
-                        return (
-                            <Ionicons
-                                name='md-settings-outline'
+                                name={'hammer-outline'}
                                 size={size}
                                 color={color}
                             />
@@ -53,7 +47,7 @@ function App() {
                     else{
                         return (
                             <Ionicons
-                                name='md-list-outline'
+                                name='person-outline'
                                 size={size}
                                 color={color}
                             />
@@ -66,9 +60,8 @@ function App() {
                                inactiveTintColor: 'gray',
                            }}
             >
-                <Tab.Screen name="Settings" children={()=><SettingsScreen prop={settingsScreenText}/>} />
-                <Tab.Screen name="Home" children={()=><HomeScreen prop={homeScreenText}/>} />
-                <Tab.Screen name="Stack" component={StackNavigator} />
+                <Tab.Screen name="Find Job" children={()=><FindJob prop={FindJobScreenText}/>} />
+                <Tab.Screen name="Profil" children={()=><Profil prop={ProfilScreenText}/>} />
             </Tab.Navigator>
         </NavigationContainer>
     );
