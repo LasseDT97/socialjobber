@@ -21,5 +21,3 @@ const styles = StyleSheet.create({
 });
 
 
-//Hej med din
-//Anden besked
