@@ -1,8 +1,8 @@
 import {StyleSheet, Text, View} from "react-native";
-import * as React from "react";
+import React from "react";
 
-//Profil komponenten tager en prop med og printer indholdet af denne prop i en <Text>
-function Profil ({prop}) {
+//Profile komponenten tager en prop med og printer indholdet af denne prop i en <Text>
+function Profile ({prop}) {
     return (
         <View style={styles.container}>
             <Text style={styles.text}>{prop}</Text>
@@ -10,9 +10,9 @@ function Profil ({prop}) {
     );
 }
 
-export default Profil;
+export default Profile;
 
-//Lokal styling til brug i Profil
+//Lokal styling til brug i Profile
 const styles = StyleSheet.create({
     container: {
         paddingTop:100,

@@ -1,30 +1,31 @@
+/*
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
-/*Mine brugte komponenter*/
-import FirstComponent from "./components/FirstComponent";
-import PropsComponent from "./components/PropsComponents";
-import ButtonComponent from "./components/ButtonComponent";
-import InputComponent from "./components/InputComponent";
+//Mine brugte komponenter
+//import FirstComponent from "./components/FirstComponent";
+//import PropsComponent from "./components/PropsComponents";
+//import ButtonComponent from "./components/ButtonComponent";
+//import InputComponent from "./components/InputComponent";
 
-/*Mit billede, kommer fra øvelse der er færdiglavet
+// Mit billede, kommer fra øvelse der er færdiglavet
 
-//import FirstImage from "./assets/favicon.png"*/
+//import FirstImage from "./assets/favicon.png"
 
-const CallComponentsTemplate = () => {
+/*const CallComponentsTemplate = () => {
   return (
       <View style={styles.container}>
-        {/*Komponent uden nogen props*/}
+        {Komponent uden nogen props}
         <FirstComponent/>
 
-        {/*Komponent med Props*/}
+        //{Komponent med Props}
         <PropsComponent name={"Eigil & jesper"}/>
 
-        {/* Dynamisk farveknap */}
+        //{ Dynamisk farveknap }
         <ButtonComponent/>
 
-        {/*Input text felt*/}
+        //{ Input text felt}
         <InputComponent/>
       </View>
   );
@@ -39,3 +40,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+*/

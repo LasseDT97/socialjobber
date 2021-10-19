@@ -1,13 +1,17 @@
+// imports
 import React, {useEffect, useState} from 'react';
 import { Text, View, StyleSheet} from 'react-native';
 import SignUpForm from './components/SignUpForm';
 import firebase from 'firebase';
 import LoginForm from './components/LoginForm';
-import NewFindJob from "./components/NewFindJob";
+import Navigation from "./components/Navigation";
 import { Card } from 'react-native-paper';
+// import { initializeApp } from 'firebase';
 
-//Resten af disse imports har forkerte stier. Skal ændres fra components til views
+// For at opsætte scroll til applikationen, besøg dette link: https://www.google.com/search?q=react+native+scroll&ei=1cxuYe-YD_eC9u8PuIKm4AQ&ved=0ahUKEwiv14PoztbzAhV3gf0HHTiBCUwQ4dUDCA4&uact=5&oq=react+native+scroll&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgQIABBDMgQIABBDMgQIABBDMgQIABBDMgQIABBDMgUIABCABDIECAAQQzIFCAAQgAQyBQgAEIAEOgcIABBHELADOhAILhDHARCvARCwAxBDEJMCOgcIABCwAxBDSgQIQRgAUMAKWI8NYIEbaAFwAngBgAGtAogBogeSAQcwLjEuMi4xmAEAoAEByAEKwAEB&sclient=gws-wiz#kpvalbx=_58xuYZfPA-KDlQe2sa-wBQ21
 
+
+// Firebase Config fra firebase oprettelse
 const firebaseConfig = {
     apiKey: "AIzaSyBIBJkpo5_X89Rw5QuO_bpK0zuw_CrnNr8",
     authDomain: "socialjobber-1a05e.firebaseapp.com",
@@ -18,7 +22,7 @@ const firebaseConfig = {
 };
 
 export default function App() {
-    //Her oprettes bruger state variblen
+    //Her oprettes bruger state variablen, Bruger er som standard ikke logget ind
     const [user, setUser] = useState({ loggedIn: false });
 
     //Koden sikrer at kun én Firebase initieres under brug af appen.
@@ -38,7 +42,7 @@ export default function App() {
         });
     }
 
-    //Heri aktiverer vi vores listener i form af onAuthStateChanged, så vi dynamisk observerer om brugeren er aktiv eller ej.
+    //Heri aktiverer vi vores listener i form af onAuthStateChanged, så vi dynamisk observerer om brugeren er aktiv (logged ind) eller ej.
     useEffect(() => {
         const unsubscribe = onAuthStateChange(setUser);
         return () => {
@@ -51,7 +55,8 @@ export default function App() {
         return(
             <View style={styles.container}>
                 <Text style={styles.paragraph}>
-                    Opret eller Login med din firebase Email
+                    Velkommen til socialjobber. Dejligt du gad at komme. Vi er super glade og spændte på at annoncere
+                    dette samarbejde blabla.
                 </Text>
 
                 <Card style={{padding:20}}>
@@ -66,7 +71,7 @@ export default function App() {
         )
     }
 
-    return user.loggedIn ? <NewFindJob /> : <GuestPage/> ;
+    return user.loggedIn ? <Navigation/> : <GuestPage/> ;
 }
 
 const styles = StyleSheet.create({
