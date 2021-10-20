@@ -7,6 +7,8 @@ import Profile from "./Profile";
 // import ikoner fra Ionicons: https://ionic.io/ionicons
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackNavigator from "./StackNavigator";
+import PostedJobsList from "./PostedJobsList";
+import CreateJob from "./stackComponents/CreateJob";
 
 //Her oprettes en instans af tabnavigator
 const Tab = createBottomTabNavigator();
@@ -64,7 +66,7 @@ function Navigation() {
                                 color={color}
                             />
                         );
-                            }
+                    }
                 },
             })}
                            /*screenOptions={{
@@ -74,7 +76,7 @@ function Navigation() {
             >
                 <Tab.Screen name="Find Job" children={()=><FindJob/>} />
                 <Tab.Screen name="Profil" children={()=><Profile prop={ProfilScreenText}/>} />
-                <Tab.Screen name="Stack" component={StackNavigator} />
+                <Tab.Screen name="Create Job" component={CreateJob} />
             </Tab.Navigator>
         </NavigationContainer>
     );

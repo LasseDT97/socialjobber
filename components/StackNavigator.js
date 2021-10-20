@@ -3,6 +3,7 @@ import FindJob from "./stackComponents/FindJob";
 import ScreenTwo from "./stackComponents/ScreenTwo";
 //import DetailsScreen from "./DetailsScreen";
 import { createStackNavigator } from '@react-navigation/stack';
+import PostedJobsList from "./PostedJobsList";
 
 //Her instantieres en StackNavigator.
 const Stack = createStackNavigator()
@@ -15,13 +16,13 @@ const Stack = createStackNavigator()
 function StackNavigator() {
     return (
         <Stack.Navigator
-            initialRouteName="Details"
+            initialRouteName="Posted Jobs"
         >
-            <Stack.Screen name="ScreenOne" component={FindJob} options={{
+            <Stack.Screen name="Posted Jobs" component={ScreenTwo} options={{
                 headerTitleStyle: { textAlign: 'right', color: 'white' },
                 headerStyle: {backgroundColor: '#62bab5'}
             }} />
-            <Stack.Screen name="ScreenTwo" component={ScreenTwo} options={{
+            <Stack.Screen name="ScreenTwo" component={PostedJobsList} options={{
                 headerTitleStyle: {color: 'black'},
                 headerStyle: {backgroundColor: '#628bba'}
             }}

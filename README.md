@@ -28,3 +28,9 @@ Problemer nu:
       2. Profile (privatperson)
       3. Virksomhedsprofil
       4. Ansøgere
+
+Måske skal der byttes rundt på rækkefølgen på hvordan app.js. læser komponenter.
+Man skal måske bytte rundt så den ikke logger ind af sig selv hver gang.
+
+Måske tredje komponent i Navigator.js er StackNavigator.js og den derfor virker med ScreenOne/Two.
+- Det kunne også være export default der gør det.

@@ -1,7 +1,8 @@
 import {Button, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
+import CreateJob from './CreateJob'
 
-//Identisk med FindJob
+//Identisk med FindJob.js
 
 /*
 *ScreenTwo er den ene af de tre screens i StackNavigatoren
@@ -17,9 +18,6 @@ function ScreenTwo({navigation}) {
             <View style={{display: 'flex', justifyContent: 'space-evenly', flexDirection: 'row'}}>
                 <View style={{margin: '2%'}} >
                     <Button title="Go Back" onPress={() => navigation.goBack() } />
-                </View>
-                <View style={{margin: '2%'}} >
-                    <Button title="Go To Screen One" onPress={() => navigation.navigate('ScreenOne')}  />
                 </View>
             </View>
         </View>
