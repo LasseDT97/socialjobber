@@ -1,3 +1,4 @@
+//import import
 import * as React from 'react';
 import { Text, SafeAreaView, View, StyleSheet, Button} from 'react-native';
 import Constants from 'expo-constants';
@@ -7,27 +8,38 @@ import {Accuracy} from 'expo-location';
 import { useState, useEffect } from 'react';
 
 function Map() {
+
+    //instantiering af statevariabler
     const [hasLocationPermission, setLocationPermission] = useState(false);
     const [currentLocation, setCurrentLocation] = useState(null)
     const [userMarkerCoordinates, setUserMarkerCoordinates] = useState([])
-    const [selectedCoordniate, setSelectedCoordinates] = useState(null)
+    const [selectedCoordinate, setSelectedCoordinates] = useState(null)
 
+    //getLocationPermissions udnytter prædefinerede asynkrone metode requestForegroundPermissionsAsync.
     const getLocationPermission = async () => {
-        await Location.requestForegroundPermissionAsync().then((item) => {
+        // spørger om tilladelse til at benytte enhedens position.
+        // Resultatet af denne handling benyttes til at sætte værdien af locationPermissions
+        await Location.requestForegroundPermissionsAsync().then((item) => {
             setLocationPermission(item.granted)
         });
     };
-
+    // I useEffeect kaldes getlocationPermissions.
+    // Det betyder at enheden bliver bedt om tilladelse så snart appen kører
     useEffect(() => {
         const response = getLocationPermission()
     });
 
+    // Metoden updateLocation  udnytter prædefinerede asynkrone metode getCurrentPostionAsync
     const updateLocation = async () => {
+        //Resultatet af kaldet benyttes til at sætte currentLocation
+        //Accuracy.Balanced er bare hvor stringent den skal være
         await Location.getCurrentPositionAsync({accuracy: Accuracy.Balanced}).then((item) => {
             setCurrentLocation(item.coords)
         });
     };
 
+    //Metoden handleLongPress tager et event som argument og henter værdien af et koordinatsæt.
+    //Værdien gemmes i en variabel der tilføjes til et array af koordinator.
     const handleLongPress = event => {
         const coordinate = event.nativeEvent.coordinate
         setUserMarkerCoordinates((oldArray) => [...oldArray, coordinate])
@@ -93,10 +105,10 @@ function Map() {
                         onPress={() => handleSelectMarker(coordinate)}/>
                 ))}
                 </MapView>
-                {selectedCoordniate && selectedAddress && (
+                {selectedCoordinate && selectedAddress && (
                     <View style={styles.infoBox}>
                         <Text style={styles.infoText}>
-                            {selectedCoordniate.latitude}, {selectedCoordniate.longitude}
+                            {selectedCoordinate.latitude}, {selectedCoordinate.longitude}
                         </Text>
                             <Text style={styles.infoText}>
                             name: {selectedAddress[0].name} region {selectedAddress[0].region}
@@ -135,4 +147,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default Map
+export default Map;
