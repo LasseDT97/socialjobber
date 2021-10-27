@@ -1,6 +1,6 @@
 import {Button, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
-import CreateJob from '../CreateJob'
+import CreateJob from './CreateJob'
 
 //Identisk med FindJob.js
 

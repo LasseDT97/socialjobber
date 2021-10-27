@@ -1,39 +1,35 @@
-import {StyleSheet, Text, View} from "react-native";
+import {Button, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 //import React, {Fragment} from "react";
 import firebase from 'firebase';
-import { v4 as uuidv4 } from "uuid"
+import { v4 as uuidv4 } from "uuid";
 import {TextInput} from "react-native-web";
-import {SafeAreaView} from "react-navigation";
+// import {SafeAreaView} from "react-navigation";
+import { useEffect, useState} from "react";
+import {date, formatDate} from "yarn/lib/cli";
 
 function SnapshotFirebase() {
-    const [jobs, setJobs] = useState([]);
-    const [loading, setLoading] = useState(false);
+    const [employer, setEmployer] = useState('')
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
-
+    const [date, setDate] = useState({date});
+    const [hours, setHours] = useState('');
 
     const ref = firebase.firestore().collection('jobs');
 
     function getJobs() {
-        setLoading(true);
         ref.onSnapshot((querySnapshot) => {
             const items = [];
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-            setJobs(items);
-            setLoading(false);
+            setEmployer(items);
         });
     }
 
     useEffect(() => {
         getJobs();
     }, []);
-
-    if (loading) {
-        return <Text>Loading...</Text>;
-    }
 
     function addJob(newJob) {
         ref
@@ -63,24 +59,34 @@ function SnapshotFirebase() {
             })
     }
 
-    function handleChange(event) {
-
-    }
 
 
     return (
-    <SafeAreaView>
         <View style={styles.container}>
             <Text style={styles.h1}>Post New Job</Text>
-            <TextInput
-                style={{height: 40}}
-                placeholder="Type here to translate!"
-                onChangeText={title => setTitle(text)}
-                defaultValue={text}
-            >Job Title</TextInput>
-
+            <TextInput style={{height: 40}}
+                placeholder="Employer name"
+                onChangeText={employer => setEmployer(text)}
+                defaultValue={text} />
+            <TextInput style={{height: 40}}
+               placeholder="Title"
+               onChangeText={title => setTitle(text)}
+               defaultValue={text} />
+            <TextInput style={{height: 40}}
+               placeholder="Description"
+               onChangeText={desc => setDesc(text)}
+               defaultValue={text} />
+            <TextInput style={{height: 40}}
+               placeholder="Date"
+               onChangeText={date => setDate(formatDate(date))}
+               defaultValue={text} />
+            <TextInput style={{height: 40}}
+               placeholder="Hours"
+               onChangeText={hours => setHours(text)}
+               defaultValue={text} />
+            <Button onPress={() => addJob({employer, title, desc, date, hours, id: uuidv4() })}>
+                Submit Job</Button>
         </View>
-    </SafeAreaView>
     );
 }
 
