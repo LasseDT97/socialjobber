@@ -39,6 +39,7 @@ function PostedJobsList() {
         return <Text>Loading...</Text>;
     }
 
+
     return (
         <View style={styles.container} >
             <Text>Ledige Job</Text>
@@ -52,6 +53,7 @@ function PostedJobsList() {
         </View>
     );
 }
+
 
 //Lokal styling til brug i PostedJobsList
 const styles = StyleSheet.create({

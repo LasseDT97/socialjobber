@@ -8,7 +8,7 @@ import Profile from "./Profile";
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import StackNavigator from "./StackNavigator";
 import PostedJobsList from "./PostedJobsList";
-import CreateJob from "./stackComponents/CreateJob";
+import CreateJob from "./CreateJob";
 
 //Her oprettes en instans af tabnavigator
 const Tab = createBottomTabNavigator();
