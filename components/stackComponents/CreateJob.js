@@ -2,7 +2,7 @@ import {Button, StyleSheet, Text, View} from "react-native";
 import * as React from "react";
 //import React, {Fragment} from "react";
 import firebase from 'firebase';
-import { v4 as uuidv4 } from "uuid";
+import { v4 as uuid4 } from "uuid";
 import {TextInput} from "react-native-web";
 // import {SafeAreaView} from "react-navigation";
 import { useEffect, useState} from "react";
@@ -81,7 +81,7 @@ function SnapshotFirebase() {
                        placeholder="Hours"
                        onChangeText={hours => setHours(text)}
                        defaultValue={text} />
-            <Button onPress={() => addJob({employer, title, desc, date, hours, id: uuidv4() })}>
+            <Button onPress={() => addJob({employer, title, desc, date, hours, id: uuid4() })}>
                 Submit Job</Button>
         </View>
     );
