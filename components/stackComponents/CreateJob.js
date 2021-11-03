@@ -6,7 +6,6 @@ import { v4 as uuidv4 } from "uuid";
 import {TextInput} from "react-native-web";
 // import {SafeAreaView} from "react-navigation";
 import { useEffect, useState} from "react";
-//import {date, formatDate} from "yarn/lib/cli";
 
 function SnapshotFirebase() {
     const [employer, setEmployer] = useState('')
