@@ -1,3 +1,4 @@
+// Lasse
 import React, {useState} from 'react';
 import { Button,Text, View, TextInput, StyleSheet } from 'react-native';
 import firebase from 'firebase';

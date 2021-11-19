@@ -1,3 +1,4 @@
+// Anton
 import {Button, Card, StyleSheet, Text, View, ScrollView} from "react-native";
 import * as React from "react";
 import Profile from "../Profile";

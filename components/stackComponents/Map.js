@@ -1,3 +1,4 @@
+// Lasse
 //import import
 import * as React from 'react';
 import { Text, SafeAreaView, View, StyleSheet, Button} from 'react-native';
