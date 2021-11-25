@@ -7,20 +7,9 @@ import firebase from 'firebase';
 import LoginForm from './components/LoginForm';
 import Navigation from "./components/Navigation";
 import { Card } from 'react-native-paper';
-import CreateJob from "./components/stackComponents/CreateJob";
-// import { initializeApp } from 'firebase';
+import firebaseConfig from "./firebase";
 
 // For at opsætte scroll til applikationen, besøg dette link: https://www.google.com/search?q=react+native+scroll&ei=1cxuYe-YD_eC9u8PuIKm4AQ&ved=0ahUKEwiv14PoztbzAhV3gf0HHTiBCUwQ4dUDCA4&uact=5&oq=react+native+scroll&gs_lcp=Cgdnd3Mtd2l6EAMyBQgAEIAEMgQIABBDMgQIABBDMgQIABBDMgQIABBDMgQIABBDMgUIABCABDIECAAQQzIFCAAQgAQyBQgAEIAEOgcIABBHELADOhAILhDHARCvARCwAxBDEJMCOgcIABCwAxBDSgQIQRgAUMAKWI8NYIEbaAFwAngBgAGtAogBogeSAQcwLjEuMi4xmAEAoAEByAEKwAEB&sclient=gws-wiz#kpvalbx=_58xuYZfPA-KDlQe2sa-wBQ21
-
-// Firebase Config fra firebase oprettelse
-const firebaseConfig = {
-    apiKey: "AIzaSyBIBJkpo5_X89Rw5QuO_bpK0zuw_CrnNr8",
-    authDomain: "socialjobber-1a05e.firebaseapp.com",
-    projectId: "socialjobber-1a05e",
-    storageBucket: "socialjobber-1a05e.appspot.com",
-    messagingSenderId: "826923145982",
-    appId: "1:826923145982:web:bde71a28d1d0ee803523af"
-};
 
 export default function App() {
     //Her oprettes bruger state variablen, Bruger er som standard ikke logget ind

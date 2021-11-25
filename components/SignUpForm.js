@@ -7,7 +7,6 @@ function SignUpForm() {
     //Instantiering af state-variabler, der skal benyttes i SignUpForm
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const [phone, setPhone] = useState('')
     //const [isCompleted, setCompleted] = useState(false)
     const [errorMessage, setErrorMessage] = useState(null)
 
@@ -51,13 +50,6 @@ function SignUpForm() {
                 value={password}
                 onChangeText={(password) => setPassword(password)}
                 secureTextEntry
-                style={styles.inputField}
-            />
-            <TextInput
-                placeholder="phone"
-                value={phone}
-                onChangeText={(phone) => setPhone(phone)}
-                keyboardType='numeric'
                 style={styles.inputField}
             />
             {errorMessage && (

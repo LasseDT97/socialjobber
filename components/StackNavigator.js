@@ -5,6 +5,7 @@ import ScreenTwo from "./stackComponents/ScreenTwo";
 //import DetailsScreen from "./DetailsScreen";
 import { createStackNavigator } from '@react-navigation/stack';
 import PostedJobsList from "./PostedJobsList";
+import map from './stackComponents/Map';
 
 //Her instantieres en StackNavigator.
 const Stack = createStackNavigator()

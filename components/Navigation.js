@@ -11,6 +11,7 @@ import StackNavigator from "./StackNavigator";
 import PostedJobsList from "./PostedJobsList";
 import SnapshotFirebase from "./stackComponents/CreateJob";
 import Map from "./stackComponents/Map";
+import CreateJob from "./stackComponents/CreateJob";
 //Her oprettes en instans af tabnavigator
 const Tab = createBottomTabNavigator();
 
@@ -41,7 +42,7 @@ function Navigation() {
                 tabBarActiveTintColor: 'blue',
                 tabBarInactiveTintColor: 'gray',
                 tabBarIcon: ({ color, size }) => {
-                    if (route.name === 'Navigation') {
+                    if (route.name === 'Find Job') {
                         return (
                             <Ionicons
                                 name={'hammer-outline'}
@@ -49,7 +50,7 @@ function Navigation() {
                                 color={color}
                             />
                         );
-                    } else if (route.name == 'Profile') {
+                    } else if (route.name == 'Profil') {
                         return (
                             <Ionicons
                                 name='person-outline'
@@ -57,9 +58,15 @@ function Navigation() {
                                 color={color}
                             />
                         );
-                    }
-                    //Dette ikon bestemmer over både dette og ikon på første navigator item, underligt.
-                    else {
+                    } else if (route.name == 'Create Job') {
+                        return (
+                            <Ionicons
+                                name='briefcase-outline'
+                                size={size}
+                                color={color}
+                            />
+                        );
+                    } else {
                         return (
                             <Ionicons
                                 name='list-outline'
@@ -77,7 +84,7 @@ function Navigation() {
             >
                 <Tab.Screen name="Find Job" children={()=><FindJob/>} />
                 <Tab.Screen name="Profil" children={()=><Map/>} />
-                <Tab.Screen name="Create Job" component={SnapshotFirebase} />
+                <Tab.Screen name="Create Job" component={CreateJob} />
             </Tab.Navigator>
         </NavigationContainer>
     );

@@ -4,6 +4,7 @@ import * as React from "react";
 import Profile from "../Profile";
 import SignUpForm from "../SignUpForm";
 import PostedJobsList from "../PostedJobsList";
+import Map from './Map';
 
 /*
 *FindJob er den ene af de tre screens i StackNavigatoren
@@ -20,7 +21,7 @@ function FindJob({ navigation }) {
                     <PostedJobsList />
                 </View>
                 <View style={{margin: '2%'}} >
-                    <Button title="Gå til profil" onPress={() => navigation.navigate('Profile')}/>
+                    <Button title="Show on map" onPress={() => navigation.navigate('Map')}/>
                 </View>
                 <View style={{margin: '2%'}} >
                     <Button title="Gå til screen to" onPress={() => navigation.navigate('ScreenTwo')}/>

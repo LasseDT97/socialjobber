@@ -1,19 +1,17 @@
 // Anton
 import {Button, StyleSheet, Text, View} from "react-native";
+import {TextInput} from "react-native-web";
+import { useEffect, useState, Fragment} from "react";
 import * as React from "react";
-//import React, {Fragment} from "react";
 import firebase from 'firebase';
 import { v4 as uuid4 } from "uuid";
-import {TextInput} from "react-native-web";
-// import {SafeAreaView} from "react-navigation";
-import { useEffect, useState} from "react";
 
 function SnapshotFirebase() {
-    const [employer, setEmployer] = useState('')
+    //const [employer, setEmployer] = useState('')
+    //const [address, setAddress] = useState('')
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
-    const [date, setDate] = useState('');
-    const [hours, setHours] = useState('');
+    //const [datetime, setDatetime] = useState('');
 
     const ref = firebase.firestore().collection('jobs');
 
@@ -23,7 +21,7 @@ function SnapshotFirebase() {
             querySnapshot.forEach((doc) => {
                 items.push(doc.data());
             });
-            setEmployer(items);
+            setTitle(items);
         });
     }
 
@@ -50,7 +48,6 @@ function SnapshotFirebase() {
     }
 
     function editJob(updatedJob) {
-        setLoading();
         ref
             .doc(updatedJob.id)
             .update(updatedJob)
@@ -59,12 +56,39 @@ function SnapshotFirebase() {
             })
     }
 
+
     return (
+            <Fragment>
+                <Text>Jobs</Text>
+                <View>
+                    <Text>Add new</Text>
+                    <TextInput
+                        type="string"
+                        value={title}
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                    <TextInput
+                        type="string"
+                        value={desc}
+                        onChange={(e) => setDesc(e.target.value)}
+                    />
+                    <Button onClick={() => addJob({ title, desc, id: uuid4() })}>
+                        Add Job
+                    </Button>
+                </View>
+            </Fragment>
+        )}
+
+   /* return (
         <View style={styles.container}>
             <Text style={styles.h1}>Post New Job</Text>
             <TextInput style={{height: 40}}
                        placeholder="Employer name"
                        onChangeText={employer => setEmployer(text)}
+                       defaultValue={text} />
+            <TextInput style={{height: 40}}
+                       placeholder="Address"
+                       onChangeText={address => setAddress(text)}
                        defaultValue={text} />
             <TextInput style={{height: 40}}
                        placeholder="Title"
@@ -75,20 +99,16 @@ function SnapshotFirebase() {
                        onChangeText={desc => setDesc(text)}
                        defaultValue={text} />
             <TextInput style={{height: 40}}
-                       placeholder="Date"
-                       onChangeText={date => setDate(formatDate(date))}
+                       placeholder="Date and time"
+                       onChangeText={datetime => setDatetime(timestamp)}
                        defaultValue={text} />
-            <TextInput style={{height: 40}}
-                       placeholder="Hours"
-                       onChangeText={hours => setHours(text)}
-                       defaultValue={text} />
-            <Button onPress={() => addJob({employer, title, desc, date, hours, id: uuid4() })}>
+            <Button onPress={() => addJob({employer, address, title, desc, datetime, id: uuid4() })}>
                 Submit Job</Button>
         </View>
     );
-}
+}*/
 
-const styles = StyleSheet.create({
+/*const styles = StyleSheet.create({
     container: {
         borderColor: 'black',
         borderWidth: 2,
@@ -104,6 +124,6 @@ const styles = StyleSheet.create({
     regularText: {
         fontSize: 20,
     },
-});
+});*/
 
 export default SnapshotFirebase;
